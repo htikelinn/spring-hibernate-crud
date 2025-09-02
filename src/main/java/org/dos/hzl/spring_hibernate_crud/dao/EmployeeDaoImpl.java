@@ -18,22 +18,23 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Employee> get() {
-       Session cuSession = entityManager.unwrap(Session.class);
-       Query<Employee> query = cuSession.createQuery("from Employee",Employee.class);
-       List<Employee> list = query.getResultList();
-       return list;
+        Session cuSession = entityManager.unwrap(Session.class);
+        Query<Employee> query = cuSession.createQuery("from Employee", Employee.class);
+        List<Employee> list = query.getResultList();
+        return list;
     }
 
     @Override
     public Employee get(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        Session cuSession = entityManager.unwrap(Session.class);
+        Employee employee = cuSession.get(Employee.class, id);
+        return employee;
     }
 
     @Override
     public void save(Employee employee) {
         Session cuSession = entityManager.unwrap(Session.class);
-        cuSession.save(employee);
+        cuSession.saveOrUpdate(employee);
     }
 
     @Override
